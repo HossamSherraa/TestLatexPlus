@@ -37,6 +37,7 @@
 			children = (
 				D03170242B37B0AF00835C31 /* TestLatexPlus */,
 				D03170232B37B0AF00835C31 /* Products */,
+				D03170372B37BC8100835C31 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +68,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		D03170372B37BC8100835C31 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,6 +91,8 @@
 			dependencies = (
 			);
 			name = TestLatexPlus;
+			packageProductDependencies = (
+			);
 			productName = TestLatexPlus;
 			productReference = D03170222B37B0AF00835C31 /* TestLatexPlus.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +121,9 @@
 				Base,
 			);
 			mainGroup = D03170192B37B0AF00835C31;
+			packageReferences = (
+				D03170332B37B18500835C31 /* XCRemoteSwiftPackageReference "SwiftMath" */,
+			);
 			productRefGroup = D03170232B37B0AF00835C31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,6 +357,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D03170332B37B18500835C31 /* XCRemoteSwiftPackageReference "SwiftMath" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mgriebling/SwiftMath";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = D031701A2B37B0AF00835C31 /* Project object */;
 }
