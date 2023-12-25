@@ -130,8 +130,16 @@ struct MathJaxView: UIViewRepresentable {
             let x = URL.applicationDirectory.appending(path: "12.pdf")
             let page = try! PDFDocument(data: data)!.page(at: 0)!
             let selection = page.selection(from: .zero, to: .init(x: page.bounds(for: .mediaBox).width, y: page.bounds(for: .mediaBox).height))
-            print(selection!.bounds(for: page))
-            try? data.write(to: x)
+            let selectionSize = CGRect(origin: selection!.bounds(for: page).origin, size: .init(width: max(selection!.bounds(for: page).width, UIScreen.main.bounds.width), height: selection!.bounds(for: page).height))
+            let newPDF = PDFDocument()
+            page.setBounds(selectionSize, for: .mediaBox)
+            page.setBounds(selectionSize, for: .artBox)
+            page.setBounds(selectionSize, for: .bleedBox)
+            page.setBounds(selectionSize, for: .cropBox)
+            page.setBounds(selectionSize, for: .trimBox)
+            newPDF.insert(page, at: 0)
+            
+            try? newPDF.dataRepresentation()!.write(to: x)
             
         }
     }
@@ -153,8 +161,17 @@ struct ContentView : View {
 }
 
 let latexExample = #"""
-To solve the quadratic equation \(2x^2 + 5x - 3 = 0\), we can use the quadratic formula: $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$ where \(a\), \(b\), and \(c\) are the coefficients of the quadratic equation. In this case, \(a = 2\), \(b = 5\), and \(c = -3\). Substituting
+
+  To solve the quadratic equation \(2x^2 + 5x - 3 = 0\), we can use the quadratic formula: $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$ where \(a\), \(b\), and \(c\) are the coefficients of the quadratic equation.
 
 
 
+
+
+
+ In this case, \(a = 2\),
+
+
+ \(b = 5\), and \(c = -3\). Substituting these values into the quadratic formula, we get: $$x = \frac{-5 \pm \sqrt{5^2 - 4(2)(-3)}}{2(2)}$$ Simplifying the expression under the square root, we get: $$x = \frac{-5 \pm \sqrt{25 + 24}}{4}$$ $$x = \frac{-5 \pm \sqrt{49}}{4}$$ $$x = \frac{-5 \pm 7}{4}$$ There are two possible solutions for \(x\): $$x = \frac{-5 + 7}{4} \quad \text{or} \quad x = \frac{-5 - 7}{4}$$ $$x = \frac{2}{4} \quad \text{or} \quad x = \frac{-12}{4}$$ $$x = \frac{1}{2} \quad \text{or} \quad x = -3$$ Therefore, the solutions to the equation \(2x^2 + 5x - 3 = 0\) are \(x = \frac{1}{2}\) and \(x = -3\).
+ ﻿
 """#
